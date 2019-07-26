@@ -138,8 +138,8 @@ function servicenavprotection_civicrm_buildForm($formName, &$form) {
       );
     }
     if ($form->_action & CRM_Core_Action::UPDATE) {
-      if (array_search($form->_activityTypeId, $disallowedActivities)) {
-        unset($disallowedActivities[1]);
+      if ($unsetVal = array_search($form->_activityTypeId, $disallowedActivities)) {
+        unset($disallowedActivities[$unsetVal]);
       }
       $activityOptions = array_diff_key(CRM_Core_PseudoConstant::ActivityType(FALSE), array_flip($disallowedActivities));
 
