@@ -163,7 +163,8 @@ function servicenavprotection_civicrm_buildForm($formName, &$form) {
   // Restrict activity types available in the "New Activity" creation list on contact summary page.
   if ($formName == "CRM_Activity_Form_ActivityLinks") {
     $disallowedActivities = [22, 136, 137];
-    $activityOptions = array_diff_key(CRM_Core_PseudoConstant::ActivityType(FALSE), array_flip($disallowedActivities));
+    $activities = CRM_Core_PseudoConstant::activityType(TRUE, TRUE, FALSE, 'name', TRUE);
+    $activityOptions = array_diff_key($activities, array_flip($disallowedActivities));
     $activityTypes = CRM_Core_Smarty::singleton()->get_template_vars('activityTypes');
     foreach ($activityTypes as $key => $activity) {
       if (!array_key_exists($activity['value'], $activityOptions)) {
